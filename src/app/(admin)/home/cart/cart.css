@@ -1,0 +1,114 @@
+.cart-container {
+  width: 400px;
+  height: 73vh;
+  background-color: rgba(255, 255, 255, 0.317);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+}
+
+.cart-checkout-container {
+  width: 100%;
+  align-self: center;
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+.cart-item {
+  margin-top: 5px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 10px;
+}
+
+.cart-item-name {
+  width: 70%;
+  height: 100%;
+  /* background: #00000069; */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+.cart-item-price {
+  width: 100px;
+}
+
+.cart-item-desc {
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 200;
+}
+.checkout-btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: #eb960d;
+  align-self: center;
+  margin-top: auto; /* pushes it to the bottom */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: #000;
+}
+
+.cancel-btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  align-self: center;
+  margin-top: auto; /* pushes it to the bottom */
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: #000;
+  /* border: #eb960d 1px solid; */
+  font-weight: 600;
+}
+.remove-btn {
+  height: 50px;
+
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  align-self: center;
+  margin-top: auto; /* pushes it to the bottom */
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: #000;
+  /* border: #eb960d 1px solid; */
+  font-weight: 600;
+}
+
+.cart-header-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  padding: 0 10px;
+  font-weight: 600;
+}
+@media only screen and (max-width: 1200px) {
+  .cart-container {
+    width: 360px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .cart-container {
+    width: 300px;
+  }
+}

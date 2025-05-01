@@ -1,0 +1,48 @@
+.home-layout {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+/* .parent {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  position: relative;
+} */
+.home-layout-left {
+  height: 80vh;
+  overflow-y: scroll;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.home-layout-left::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* .home-layout-right {
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+} */
+
+@media only screen and (max-width: 1200px) {
+  .home-layout {
+    gap: 30px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .home-layout {
+    gap: 10px;
+  }
+  .home-layout-right {
+  }
+}

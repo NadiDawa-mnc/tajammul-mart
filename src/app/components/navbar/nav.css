@@ -1,0 +1,90 @@
+.nav {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+}
+
+.logo-container {
+  width: 40%;
+  color: rgb(29, 117, 194);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5rem;
+}
+
+.link-container {
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 60px;
+  list-style: none;
+  text-decoration: none;
+}
+
+.links {
+  width: 50px;
+}
+.elink {
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+
+.active {
+  transition: all 0.2s ease-in-out;
+  color: rgb(67, 124, 229);
+  font-weight: 500;
+}
+
+.elink:hover {
+  color: rgb(19, 62, 142);
+  transition: all 0.5s ease-in-out;
+}
+.username {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(42, 110, 165);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 30px;
+}
+.logoOutbtn {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: brown;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 30px;
+
+  cursor: pointer;
+}
+.logoOutbtn:hover {
+  background-color: rgb(178, 57, 57);
+}
+
+@media screen and (max-width: 800px) {
+  .nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 30px;
+  }
+  .link-container {
+    width: 500px;
+
+    gap: 20px;
+  }
+}
