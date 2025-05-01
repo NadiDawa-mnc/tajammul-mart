@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import './login.css'
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/user'
 
 let response = await fetch(`${apiUrl}/api/user`, {
   method: 'POST',
@@ -26,13 +25,16 @@ export default function Login() {
     } else {
       setError(false)
     }
-    let response = await fetch(apiUrl, {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: {
-        'Content-Type': 'application/json',
-      }, // Add content-type header to specify JSON
-    })
+    let response = await fetch(
+      'https://tajammul-mart-ubl7.vercel.app/api/user',
+      {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        }, // Add content-type header to specify JSON
+      }
+    )
     response = await response.json()
 
     if (response.success) {
