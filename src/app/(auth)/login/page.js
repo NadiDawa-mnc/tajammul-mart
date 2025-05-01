@@ -16,7 +16,7 @@ export default function Login() {
     } else {
       setError(false)
     }
-    let response = await fetch('https://tajammul-mart.vercel.app/api/user', {
+    let response = await fetch('/api/user', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: {
