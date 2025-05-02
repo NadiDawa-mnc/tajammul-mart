@@ -1,0 +1,30 @@
+.billing-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table {
+}
+.table-header {
+  font-weight: 600;
+
+  padding: 10px 20px;
+  border-bottom: #b239396f solid 2px;
+}
+
+.table-items {
+  padding: 10px 20px;
+  border-bottom: #393bb224 solid 2px;
+}
+.table-header,
+.table-items {
+  display: flex;
+}
+.s {
+  width: 170px;
+}
+.no {
+  width: 50px;
+}

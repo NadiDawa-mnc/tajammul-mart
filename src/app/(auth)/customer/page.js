@@ -8,12 +8,17 @@ import { useRouter } from 'next/navigation'
 export default function Customer() {
   const router = useRouter()
   const [cartItems, setCartItems] = useState([])
+  const [Name, setName] = useState([])
+  const [campus, setCampus] = useState([])
+  const [user, setUser] = useState('')
 
   useEffect(() => {
     const data = localStorage.getItem('cartItems')
+    const user = JSON.parse(localStorage.getItem('user'))
     if (data) {
       try {
         setCartItems(JSON.parse(data))
+        setUser(user.username)
       } catch (err) {
         console.error('Error parsing cart items:', err)
       }
@@ -24,8 +29,49 @@ export default function Customer() {
     (sum, item) => sum + item.price * item.count,
     0
   )
-  const placeOrder = () => {
-    router.push('/home')
+
+  const placeOrder = async () => {
+    console.log(user)
+    const paymentMode = document.querySelector(
+      'input[name="payment"]:checked'
+    )?.id
+    const deliveryStatus = document.querySelector(
+      'input[name="DeliveredStatus"]:checked'
+    )?.id
+    const paymentStatus = document.querySelector(
+      'input[name="paymentStatus"]:checked'
+    )?.id
+
+    const cleanedCartItems = cartItems.map(({ _id, ...rest }) => rest)
+
+    const orderData = {
+      customerName: Name,
+      campus: campus,
+      paymentMode,
+      deliveryStatus,
+      paymentStatus,
+      cartItems: cleanedCartItems,
+      total,
+      user,
+      createdAt: new Date().toISOString(),
+    }
+
+    try {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+      })
+
+      if (res.ok) {
+        router.push('/billing')
+      } else {
+        const errorData = await res.json()
+        console.error('Order submission failed:', errorData)
+      }
+    } catch (err) {
+      console.error('Network error submitting order:', err)
+    }
   }
 
   return (
@@ -42,11 +88,19 @@ export default function Customer() {
                   className='input'
                   type='text'
                   placeholder='Customer Name'
+                  onChange={(e) => setName(e.target.value)}
+                  value={Name}
                 />
               </div>
 
               <div>
-                <input className='input' type='text' placeholder='Campus' />
+                <input
+                  className='input'
+                  type='text'
+                  placeholder='Campus'
+                  onChange={(e) => setCampus(e.target.value)}
+                  value={campus}
+                />
               </div>
             </div>
             <div className='customer-payment-mode'>
