@@ -1,4 +1,5 @@
 'use client'
+import './gpay.css'
 import { useState } from 'react'
 import QRCode from 'react-qr-code'
 
@@ -12,9 +13,18 @@ export default function GPayQRCode({ money }) {
   )}&am=${money}&cu=INR`
 
   return (
-    <div>
-      <h2>GPay QR Code Generator</h2>
-
+    <div className='gpay-container'>
+      <div>
+        <h2
+          style={{
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          {name}
+        </h2>
+        upi id: {upiId}
+      </div>
       <div
         style={{
           marginTop: '20px',
@@ -23,8 +33,7 @@ export default function GPayQRCode({ money }) {
           display: 'inline-block',
         }}
       >
-        <QRCode value={upiLink} size={150} />
-        <p style={{ marginTop: '10px' }}>Scan to pay ₹{money}</p>
+        <QRCode value={upiLink} size={250} />
       </div>
     </div>
   )

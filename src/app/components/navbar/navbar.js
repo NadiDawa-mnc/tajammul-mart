@@ -53,9 +53,9 @@ export default function Navbar({ NavLinks }) {
           )
         })}
 
-        <button onClick={logout} className='logoOutbtn'>
+        {/* <button onClick={logout} className='logoOutbtn'>
           Logo Out
-        </button>
+        </button> */}
 
         <h2 className='username'>{userDetails?.username}</h2>
       </ul>
