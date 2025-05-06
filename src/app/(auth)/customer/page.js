@@ -11,6 +11,7 @@ export default function Customer() {
   const [Name, setName] = useState([])
   const [campus, setCampus] = useState([])
   const [user, setUser] = useState('')
+  const [orderNumber, setOrderNumber] = useState('')
 
   useEffect(() => {
     const data = localStorage.getItem('cartItems')
@@ -29,9 +30,10 @@ export default function Customer() {
     (sum, item) => sum + item.price * item.count,
     0
   )
+  const [loading, setLoading] = useState(false)
 
   const placeOrder = async () => {
-    console.log(user)
+    setLoading(true) // Start loading
     const paymentMode = document.querySelector(
       'input[name="payment"]:checked'
     )?.id
@@ -64,13 +66,22 @@ export default function Customer() {
       })
 
       if (res.ok) {
-        router.push('/billing')
+        const result = await res.json()
+        setOrderNumber(result.orderNumber)
+        alert(
+          'Order Number: ' +
+            result.orderNumber +
+            ' has been placed successfully!'
+        )
+        router.push('/home')
       } else {
         const errorData = await res.json()
         console.error('Order submission failed:', errorData)
       }
     } catch (err) {
       console.error('Network error submitting order:', err)
+    } finally {
+      setLoading(false) // Stop loading regardless of success or error
     }
   }
 
@@ -246,8 +257,12 @@ export default function Customer() {
           </div>
         </div>
 
-        <button className='place-order-btn' onClick={placeOrder}>
-          Place Your Order
+        <button
+          className='place-order-btn'
+          onClick={placeOrder}
+          disabled={loading}
+        >
+          {loading ? 'Placing Order...' : 'Place Your Order'}
         </button>
       </div>
     </div>

@@ -1,4 +1,7 @@
 'use client'
+import { IoAlertCircleOutline } from 'react-icons/io5'
+import { IoCheckmarkCircleSharp } from 'react-icons/io5'
+import { LuPrinter } from 'react-icons/lu'
 
 import { useEffect, useState } from 'react'
 import './billing.css'
@@ -7,6 +10,9 @@ import { IoMdClose } from 'react-icons/io'
 export default function Billing() {
   const [orderData, setOrderData] = useState([])
   const [billData, setBillData] = useState([])
+  const [amountReceived, setAmountReceived] = useState([])
+
+  let balance = amountReceived - billData.total
 
   useEffect(() => {
     fetchData()
@@ -34,14 +40,17 @@ export default function Billing() {
               <p>
                 <IoMdClose
                   className='bill-close'
-                  onClick={() => setBillData([])}
+                  onClick={() => {
+                    setBillData([])
+                    setAmountReceived('')
+                  }}
                 />
               </p>
             </div>
 
             <div className='bill-customer'>
               <div className='bill-customer-details'>
-                <p>Invoice : TMJ0010</p>
+                <p>Invoice : {billData.orderNumber}</p>
                 <p>
                   Recipient:{' '}
                   <span className='bold'>{billData.customerName}</span>
@@ -130,9 +139,53 @@ export default function Billing() {
                 <div>{billData.total}</div>
               </div>
             </div>
+            <div className='bill-alert'>
+              {billData.deliveryStatus === 'Delivered' &&
+              billData.paymentStatus === 'paid' ? (
+                <div className='bill-alert-success'>
+                  <IoCheckmarkCircleSharp
+                    size={30}
+                    style={{ color: '#08841b' }}
+                  />
+                  <p>
+                    Item has been {billData.deliveryStatus}, and Paid by{' '}
+                    {billData.paymentMode}
+                  </p>
+                </div>
+              ) : (
+                <div className='bill-alert-failed'>
+                  <IoAlertCircleOutline
+                    size={30}
+                    style={{ color: '#f7941d' }}
+                  />
+
+                  <p>
+                    Item has been {billData.deliveryStatus}, but{' '}
+                    {billData.paymentStatus}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {billData.paymentStatus === 'not-paid' && (
+              <div className='bill-cash-pay'>
+                <input
+                  value={amountReceived}
+                  type=''
+                  className='amount-pay'
+                  placeholder='Amount Recieved'
+                  onChange={(e) => setAmountReceived(e.target.value)}
+                />{' '}
+                <p>Balance : {balance} </p>
+              </div>
+            )}
 
             <div className='bill-footer'>
-              <button className='print-button'>Print</button>
+              <button className='cancel-button'>Cancel</button>
+              <button className='print-button'>
+                Print <LuPrinter />
+              </button>
+              <button className='save-button'>Create Invoice</button>
             </div>
           </div>
         </div>

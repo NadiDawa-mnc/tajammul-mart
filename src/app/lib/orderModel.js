@@ -16,6 +16,7 @@ const OrderModel = new mongoose.Schema({
   user: String,
   total: Number,
   createdAt: Date,
+  orderNumber: String, // <-- Add this
 })
 
 // Prevent model overwrite errors in development

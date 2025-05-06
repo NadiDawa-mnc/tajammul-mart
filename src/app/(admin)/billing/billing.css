@@ -31,17 +31,16 @@
 
 .Bill-view-container {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0; /* shorthand for top: 0; bottom: 0; left: 0; right: 0; */
   background: #000000ac;
   padding: 30px;
-  height: 100vh;
   box-sizing: border-box;
+  max-height: 100vh;
+  overflow-y: auto;
 }
-
 .Bill-box {
+  margin-top: 30px;
+  margin-bottom: 30px;
   width: 800px;
   min-height: 800px;
   height: fit-content;
@@ -78,7 +77,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 60px;
+  padding: 0 50px;
   font-weight: 300;
   font-size: 0.9rem;
 }
@@ -109,7 +108,7 @@
 .bill-total {
   display: flex;
   justify-content: space-between;
-  padding: 0px 50px;
+  padding: 0px 30px;
   margin-top: 10px;
   font-weight: 700;
   border-bottom: #00000051 solid 2 px;
@@ -120,19 +119,106 @@
 .bill-footer {
   align-self: self-end;
   margin-top: auto;
+  padding: 0 30px;
+  width: 100%;
 }
-.print-button {
-  background-color: #4caf50; /* Green */
-  color: white;
+
+.cancel-button {
+  background-color: #ffffff; /* Green */
+  color: rgb(0, 0, 0);
   border: none;
-  padding: 10px 20px;
+  border: #000000 solid 1px;
+  padding: 13px 20px;
   text-align: center;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  float: left;
+}
+.print-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  padding: 13px 23px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  float: right;
+}
+
+.save-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #2441c3; /* Green */
+  color: white;
+  border: none;
+  padding: 13px 23px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  float: right;
+  margin-right: 10px;
 }
 
 .print-button:hover {
   background-color: #45a049;
+}
+
+.bill-alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+.bill-alert-failed {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  height: 60px;
+  width: 84%;
+  background: #fffccb;
+  border-radius: 20px;
+  border: #f7941d solid 1px;
+  gap: 10px;
+}
+
+.bill-alert-success {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  height: 60px;
+  width: 85%;
+  background: #e1ffe5;
+  border-radius: 20px;
+  border: #000000 solid 1px;
+  gap: 10px;
+}
+
+.bill-cash-pay {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.bill-cash-pay input {
+  padding: 15px;
+  border-radius: 10px;
+  width: 100px;
+  text-align: center;
 }

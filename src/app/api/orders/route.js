@@ -12,8 +12,19 @@ export async function GET() {
 export async function POST(req) {
   await mongoose.connect(connectionStr)
   const payload = await req.json()
-  console.log(payload) // Check what the payload looks like
-  let order = new OrderSchema(payload)
-  await order.save()
-  return NextResponse.json({ result: payload })
+
+  // Generate unique order number
+  const orderNumber = 'JM-' + Date.now()
+
+  // Attach order number to payload
+  const newOrder = new OrderSchema({ ...payload, orderNumber })
+
+  await newOrder.save()
+
+  // Return result to frontend
+  return NextResponse.json({
+    success: true,
+    orderNumber,
+    result: newOrder, // optional, for debugging
+  })
 }
