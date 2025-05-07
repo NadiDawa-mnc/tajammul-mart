@@ -1,0 +1,157 @@
+.printable-content {
+  width: 100%;
+  height: 100vh;
+  font-family: poppins;
+  font-size: 1rem;
+  border: #000000 solid 2px;
+  padding: 40px 20px;
+}
+.print-logo {
+  width: 50%;
+  height: 130px;
+}
+.print-img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+}
+.table-header {
+  font-weight: 600;
+
+  padding: 10px 20px;
+  border-bottom: #b239396f solid 2px;
+}
+
+.table-items {
+  padding: 10px 20px;
+  border-bottom: #393bb224 solid 2px;
+}
+.table-header,
+.table-items {
+  display: flex;
+}
+.s {
+  width: 170px;
+}
+.no {
+  width: 50px;
+}
+
+.Bill-view-container {
+  position: absolute;
+  inset: 0; /* shorthand for top: 0; bottom: 0; left: 0; right: 0; */
+  background: #000000ac;
+  padding: 30px;
+  box-sizing: border-box;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.Bill-box {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 800px;
+  min-height: 800px;
+  height: fit-content;
+  background-color: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bill-header {
+  padding: 40px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d71c6;
+}
+
+.bill-close {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  cursor: pointer;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+.p-bill-customer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 10px;
+  padding-bottom: 30px;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.p-bill-deatils {
+  height: fit-content;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.p-bill-deatils h2 {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+.td {
+  text-align: center;
+  height: 20px;
+  font-size: 1.7rem;
+}
+
+.ts {
+  font-size: 1.3rem;
+}
+.tds-a {
+  color: #00000051;
+}
+
+.bill-items {
+  margin-top: 20px;
+}
+.p-bill-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 30px;
+  margin-top: 30px;
+  font-weight: 600;
+  border-bottom: #00000051 solid 2 px;
+  padding-bottom: 10px;
+  color: #173de6;
+  align-self: self-end;
+  gap: 20px;
+  font-size: 1.9rem;
+}
+.no {
+  width: 100px;
+  text-align: left;
+  padding-left: 20px;
+}
+.item {
+  width: 200px;
+  text-align: left;
+}
+
+.all {
+  text-align: right;
+  padding-right: 20px;
+  width: 100px;
+}

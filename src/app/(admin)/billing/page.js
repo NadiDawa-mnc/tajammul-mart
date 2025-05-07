@@ -6,11 +6,13 @@ import { LuPrinter } from 'react-icons/lu'
 import { useEffect, useState } from 'react'
 import './billing.css'
 import { IoMdClose } from 'react-icons/io'
+import PrintComponent from '@/app/components/printComp/PrintComponent'
 
 export default function Billing() {
   const [orderData, setOrderData] = useState([])
   const [billData, setBillData] = useState([])
   const [amountReceived, setAmountReceived] = useState([])
+  const [paymentStatus, setPaymentStatus] = useState('')
 
   let balance = amountReceived - billData.total
 
@@ -27,9 +29,40 @@ export default function Billing() {
 
   const viewBill = (item) => {
     setBillData(item)
-    console.log('item', item)
+    setAmountReceived(item.amountReceived || '')
+    setPaymentStatus(item.paymentStatus || '')
   }
 
+  const updatePaymentStatus = async () => {
+    if (!billData._id) return
+
+    const updated = {
+      paymentStatus,
+      amountReceived,
+    }
+
+    try {
+      const res = await fetch(`/api/orders/${billData._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updated),
+      })
+
+      if (res.ok) {
+        const updatedOrder = await res.json()
+        setBillData((prev) => ({ ...prev, ...updated }))
+        alert('Payment status updated successfully!')
+        fetchData() // refresh orders
+      } else {
+        alert('Failed to update payment status.')
+      }
+    } catch (error) {
+      console.error(error)
+      alert('Error updating payment status.')
+    }
+  }
   return (
     <div className='billing-container'>
       {billData.cartItems ? (
@@ -177,15 +210,33 @@ export default function Billing() {
                   onChange={(e) => setAmountReceived(e.target.value)}
                 />{' '}
                 <p>Balance : {balance} </p>
+                <input
+                  type='radio'
+                  name='paymentStatus'
+                  id='paid'
+                  checked={paymentStatus === 'paid'}
+                  onChange={() => setPaymentStatus('paid')}
+                />
+                <label htmlFor='paid'>Paid</label>
+                <input
+                  type='radio'
+                  name='paymentStatus'
+                  id='not-paid'
+                  checked={paymentStatus === 'not-paid'}
+                  onChange={() => setPaymentStatus('not-paid')}
+                />
+                <label htmlFor='not-paid'>Not Paid</label>
               </div>
             )}
-
             <div className='bill-footer'>
               <button className='cancel-button'>Cancel</button>
-              <button className='print-button'>
-                Print <LuPrinter />
-              </button>
-              <button className='save-button'>Create Invoice</button>
+              <PrintComponent billData={billData} />
+
+              {billData.paymentStatus === 'not-paid' && (
+                <button className='save-button' onClick={updatePaymentStatus}>
+                  Save
+                </button>
+              )}
             </div>
           </div>
         </div>

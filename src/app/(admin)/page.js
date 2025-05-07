@@ -1,16 +1,10 @@
-import Link from 'next/link'
+import PrintComponent from '../components/printComp/PrintComponent'
 
-export default function Page() {
+export default function Home() {
   return (
-    <div>
-      <h1>HomePage</h1>
-      <Link href='/home'>Home</Link>
-      <br />
-      <Link href='/order'>order</Link>
-      <br />
-      <Link href='/billing'>billing</Link>
-      <br />
-      <Link href='/dashboard'>dashboard</Link>
-    </div>
+    <main style={{ padding: '20px' }}>
+      <h1>Next.js 15 with react-to-print</h1>
+      <PrintComponent />
+    </main>
   )
 }

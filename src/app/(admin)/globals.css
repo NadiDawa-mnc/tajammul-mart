@@ -69,6 +69,10 @@ html {
   font-size: 16px;
 }
 
+.printable-content {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .main-layout {
     padding: 18px 50px;
@@ -83,5 +87,27 @@ html {
   .main-layout {
     padding: 18px 20px;
     padding-bottom: 0;
+  }
+}
+
+@media print {
+  .printable-content {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  .page-break {
+    page-break-before: always;
   }
 }
