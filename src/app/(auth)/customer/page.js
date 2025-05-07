@@ -56,6 +56,7 @@ export default function Customer() {
       total,
       user,
       createdAt: new Date().toISOString(),
+      billedStatus: false,
     }
 
     try {

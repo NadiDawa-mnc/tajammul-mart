@@ -3,9 +3,17 @@ import { OrderSchema } from '@/app/lib/orderModel'
 import mongoose from 'mongoose'
 import { NextResponse } from 'next/server'
 
+// export async function GET() {
+//   await mongoose.connect(connectionStr)
+//   const orders = await OrderSchema.find()
+//   return NextResponse.json({ result: orders })
+// }
+
 export async function GET() {
   await mongoose.connect(connectionStr)
-  const orders = await OrderSchema.find()
+
+  const orders = await OrderSchema.find({ billedStatus: false })
+
   return NextResponse.json({ result: orders })
 }
 

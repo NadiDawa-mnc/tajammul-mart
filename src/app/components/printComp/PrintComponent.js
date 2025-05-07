@@ -130,7 +130,7 @@ const PrintComponent = (props) => {
 
       {/* Button to trigger printing */}
       <button className='print-button' onClick={handlePrint}>
-        Print <LuPrinter />
+        <LuPrinter />
       </button>
     </div>
   )

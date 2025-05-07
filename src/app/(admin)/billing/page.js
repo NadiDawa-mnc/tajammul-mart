@@ -13,6 +13,8 @@ export default function Billing() {
   const [billData, setBillData] = useState([])
   const [amountReceived, setAmountReceived] = useState([])
   const [paymentStatus, setPaymentStatus] = useState('')
+  const [deliveryStatus, setDeliveryStatus] = useState('')
+  const [billedStatus, setBilledStatus] = useState(true)
 
   let balance = amountReceived - billData.total
 
@@ -31,14 +33,17 @@ export default function Billing() {
     setBillData(item)
     setAmountReceived(item.amountReceived || '')
     setPaymentStatus(item.paymentStatus || '')
+    setDeliveryStatus(item.deliveryStatus || '')
   }
 
-  const updatePaymentStatus = async () => {
+  const handleSaveUpdate = async () => {
     if (!billData._id) return
 
     const updated = {
+      billedStatus,
       paymentStatus,
       amountReceived,
+      deliveryStatus,
     }
 
     try {
@@ -53,14 +58,45 @@ export default function Billing() {
       if (res.ok) {
         const updatedOrder = await res.json()
         setBillData((prev) => ({ ...prev, ...updated }))
-        alert('Payment status updated successfully!')
-        fetchData() // refresh orders
+        alert('Payment and delivery status updated successfully!')
+        fetchData()
       } else {
-        alert('Failed to update payment status.')
+        alert('Failed to update statuses.')
       }
     } catch (error) {
       console.error(error)
-      alert('Error updating payment status.')
+      alert('Error updating statuses.')
+    }
+  }
+  const createInvoice = async () => {
+    if (!billData._id) return
+
+    const updated = {
+      billedStatus,
+    }
+
+    try {
+      const res = await fetch(`/api/orders/${billData._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updated),
+      })
+
+      if (res.ok) {
+        const updatedOrder = await res.json()
+        setBillData((prev) => ({ ...prev, ...updated }))
+        alert('Created invoice successfully!')
+        setBillData([])
+        setAmountReceived('')
+        fetchData()
+      } else {
+        alert('Failed to create invoice')
+      }
+    } catch (error) {
+      console.error(error)
+      alert('Error updating statuses.')
     }
   }
   return (
@@ -80,7 +116,6 @@ export default function Billing() {
                 />
               </p>
             </div>
-
             <div className='bill-customer'>
               <div className='bill-customer-details'>
                 <p>Invoice : {billData.orderNumber}</p>
@@ -110,7 +145,6 @@ export default function Billing() {
                 </p>
               </div>
             </div>
-
             <div className='bill-deatils'>
               <h2>Details</h2>
               <div className='bill-items'>
@@ -174,69 +208,125 @@ export default function Billing() {
             </div>
             <div className='bill-alert'>
               {billData.deliveryStatus === 'Delivered' &&
-              billData.paymentStatus === 'paid' ? (
-                <div className='bill-alert-success'>
-                  <IoCheckmarkCircleSharp
-                    size={30}
-                    style={{ color: '#08841b' }}
-                  />
-                  <p>
-                    Item has been {billData.deliveryStatus}, and Paid by{' '}
-                    {billData.paymentMode}
-                  </p>
-                </div>
-              ) : (
+                billData.paymentStatus === 'paid' && (
+                  <div className='bill-alert-success'>
+                    <IoCheckmarkCircleSharp
+                      size={30}
+                      style={{ color: '#08841b' }}
+                    />
+                    <p>
+                      Item has been {billData.deliveryStatus}, and Paid by{' '}
+                      {billData.paymentMode}
+                    </p>
+                  </div>
+                )}
+
+              {(billData.deliveryStatus === 'not-Delivered' ||
+                billData.paymentStatus === 'not-paid') && (
                 <div className='bill-alert-failed'>
                   <IoAlertCircleOutline
                     size={30}
                     style={{ color: '#f7941d' }}
                   />
-
                   <p>
-                    Item has been {billData.deliveryStatus}, but{' '}
-                    {billData.paymentStatus}
+                    Item is {billData.deliveryStatus}, and{' '}
+                    {billData.paymentStatus} for
                   </p>
                 </div>
               )}
             </div>
 
-            {billData.paymentStatus === 'not-paid' && (
-              <div className='bill-cash-pay'>
-                <input
-                  value={amountReceived}
-                  type=''
-                  className='amount-pay'
-                  placeholder='Amount Recieved'
-                  onChange={(e) => setAmountReceived(e.target.value)}
-                />{' '}
-                <p>Balance : {balance} </p>
-                <input
-                  type='radio'
-                  name='paymentStatus'
-                  id='paid'
-                  checked={paymentStatus === 'paid'}
-                  onChange={() => setPaymentStatus('paid')}
-                />
-                <label htmlFor='paid'>Paid</label>
-                <input
-                  type='radio'
-                  name='paymentStatus'
-                  id='not-paid'
-                  checked={paymentStatus === 'not-paid'}
-                  onChange={() => setPaymentStatus('not-paid')}
-                />
-                <label htmlFor='not-paid'>Not Paid</label>
-              </div>
-            )}
-            <div className='bill-footer'>
-              <button className='cancel-button'>Cancel</button>
-              <PrintComponent billData={billData} />
+            <div className='bill-cash-pay'>
+              {billData.paymentStatus === 'not-paid' && (
+                <>
+                  {' '}
+                  <input
+                    className='amount-pay'
+                    value={amountReceived}
+                    placeholder='Amount Received'
+                    onChange={(e) => setAmountReceived(e.target.value)}
+                  />
+                  <p>Balance : {balance} </p>
+                </>
+              )}
 
               {billData.paymentStatus === 'not-paid' && (
-                <button className='save-button' onClick={updatePaymentStatus}>
+                <div className='update-inputs'>
+                  <input
+                    type='radio'
+                    name='paymentStatus'
+                    id='paid'
+                    checked={paymentStatus === 'paid'}
+                    onChange={() => setPaymentStatus('paid')}
+                  />
+                  <label className='labels' htmlFor='paid'>
+                    Paid
+                  </label>
+                  <br />
+                  <input
+                    type='radio'
+                    name='paymentStatus'
+                    id='not-paid'
+                    checked={paymentStatus === 'not-paid'}
+                    onChange={() => setPaymentStatus('not-paid')}
+                  />
+                  <label className='labels' htmlFor='not-paid'>
+                    Not Paid
+                  </label>
+                </div>
+              )}
+
+              {billData.deliveryStatus === 'not-Delivered' && (
+                <div className='update-inputs'>
+                  <input
+                    type='radio'
+                    name='deliveryStatus'
+                    id='delivered'
+                    checked={deliveryStatus === 'Delivered'}
+                    onChange={() => setDeliveryStatus('Delivered')}
+                  />
+                  <label className='labels' htmlFor='delivered'>
+                    Delivered
+                  </label>
+                  <br />
+                  <input
+                    type='radio'
+                    name='deliveryStatus'
+                    id='not-delivered'
+                    checked={deliveryStatus === 'not-Delivered'}
+                    onChange={() => setDeliveryStatus('not-Delivered')}
+                  />
+                  <label className='labels' htmlFor='not-delivered'>
+                    Not Delivered
+                  </label>
+                </div>
+              )}
+            </div>
+
+            <div className='bill-footer'>
+              {/* <button
+                onClick={() => {
+                  setBillData([])
+                  setAmountReceived('')
+                }}
+                className='cancel-button'
+              >
+                Cancel
+              </button> */}
+
+              {(billData.paymentStatus === 'not-paid' ||
+                billData.deliveryStatus === 'not-Delivered') && (
+                <button className='save-button' onClick={handleSaveUpdate}>
                   Save
                 </button>
               )}
+            </div>
+            <div className='bt'>
+              <button className='Create-button' onClick={createInvoice}>
+                Create Invoice
+              </button>
+
+              <PrintComponent billData={billData} />
             </div>
           </div>
         </div>
