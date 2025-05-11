@@ -105,6 +105,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.p-bill-bottom {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+
 .p-bill-deatils h2 {
   text-align: center;
   font-weight: 500;
@@ -141,12 +151,12 @@
   font-size: 1.9rem;
 }
 .no {
-  width: 100px;
+  width: 70px;
   text-align: left;
   padding-left: 20px;
 }
 .item {
-  width: 200px;
+  width: 270px;
   text-align: left;
 }
 

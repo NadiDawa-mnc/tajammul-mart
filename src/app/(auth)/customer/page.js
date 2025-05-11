@@ -74,7 +74,15 @@ export default function Customer() {
             result.orderNumber +
             ' has been placed successfully!'
         )
-        router.push('/home')
+
+        // Redirect based on the user's username
+        if (user === 'counter04') {
+          router.push('/') // Redirect to home if user is counter03
+        } else if (
+          ['counter01', 'counter02', 'counter03', 'admin'].includes(user)
+        ) {
+          router.push('/home') // Redirect to /home if user is counter01 or counter02
+        }
       } else {
         const errorData = await res.json()
         console.error('Order submission failed:', errorData)

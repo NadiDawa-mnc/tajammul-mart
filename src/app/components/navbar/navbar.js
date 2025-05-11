@@ -4,22 +4,21 @@ import Link from 'next/link'
 import './nav.css'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { FaRegUser } from 'react-icons/fa'
+import { IoLogOutOutline } from 'react-icons/io5'
 
 export default function Navbar({ NavLinks }) {
-  // Destructure here!
   const pathname = usePathname()
-  const [userDetails, setUserDetails] = useState()
+  const [userDetails, setUserDetails] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
-    let user = localStorage.getItem('user')
+    const user = localStorage.getItem('user')
     if (!user) {
       router.push('/login')
-    } else if (!user && pathname !== '/login') {
-      router.push('/login')
     } else {
-      setUserDetails(JSON.parse(user))
-      console.log(userDetails)
+      const parsedUser = JSON.parse(user)
+      setUserDetails(parsedUser)
     }
   }, [])
 
@@ -27,6 +26,26 @@ export default function Navbar({ NavLinks }) {
     localStorage.removeItem('user')
     router.push('/login')
   }
+
+  const getFilteredNavLinks = () => {
+    if (!userDetails?.username) return []
+
+    const { username } = userDetails
+
+    if (username === 'admin') {
+      return NavLinks // full access
+    } else if (['counter01', 'counter02', 'counter03'].includes(username)) {
+      return NavLinks.filter((link) =>
+        ['/', '/home', '/order'].includes(link.href)
+      )
+    } else if (username === 'counter04') {
+      return NavLinks.filter((link) => ['/', '/order'].includes(link.href))
+    } else {
+      return [] // default: no access
+    }
+  }
+
+  const filteredNavLinks = getFilteredNavLinks()
 
   return (
     <nav className='nav'>
@@ -39,7 +58,7 @@ export default function Navbar({ NavLinks }) {
         />
       </div>
       <ul className='link-container'>
-        {NavLinks.map((link) => {
+        {filteredNavLinks.map((link) => {
           const isActive = link.href === pathname
           return (
             <li className='links' key={link.href}>
@@ -52,12 +71,13 @@ export default function Navbar({ NavLinks }) {
             </li>
           )
         })}
-
-        {/* <button onClick={logout} className='logoOutbtn'>
-          Logo Out
-        </button> */}
-
-        <h2 className='username'>{userDetails?.username}</h2>
+        <h2 className='username'>
+          <FaRegUser />
+          {userDetails?.username}
+        </h2>
+        <p className='logout'>
+          <IoLogOutOutline size={30} onClick={logout} />
+        </p>
       </ul>
     </nav>
   )

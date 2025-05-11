@@ -34,6 +34,7 @@ export default function Billing() {
     setAmountReceived(item.amountReceived || '')
     setPaymentStatus(item.paymentStatus || '')
     setDeliveryStatus(item.deliveryStatus || '')
+    console.log(item)
   }
 
   const handleSaveUpdate = async () => {
@@ -58,7 +59,6 @@ export default function Billing() {
       if (res.ok) {
         const updatedOrder = await res.json()
         setBillData((prev) => ({ ...prev, ...updated }))
-        alert('Payment and delivery status updated successfully!')
         fetchData()
       } else {
         alert('Failed to update statuses.')
@@ -224,81 +224,89 @@ export default function Billing() {
               {(billData.deliveryStatus === 'not-Delivered' ||
                 billData.paymentStatus === 'not-paid') && (
                 <div className='bill-alert-failed'>
-                  <IoAlertCircleOutline
-                    size={30}
-                    style={{ color: '#f7941d' }}
-                  />
-                  <p>
-                    Item is {billData.deliveryStatus}, and{' '}
-                    {billData.paymentStatus} for
-                  </p>
-                </div>
-              )}
-            </div>
+                  <div className='alert-message'>
+                    {' '}
+                    <IoAlertCircleOutline
+                      size={30}
+                      style={{ color: '#f7941d' }}
+                    />
+                    <p>
+                      Item is {billData.deliveryStatus}, and{' '}
+                      {billData.paymentStatus} for
+                    </p>
+                  </div>
+                  <div className='bill-cash-pay'>
+                    {billData.paymentStatus === 'not-paid' && (
+                      <>
+                        {' '}
+                        <input
+                          className='amount-pay'
+                          value={amountReceived}
+                          placeholder='Amount Received'
+                          onChange={(e) => setAmountReceived(e.target.value)}
+                        />
+                        <p>Balance : {balance} </p>
+                      </>
+                    )}
 
-            <div className='bill-cash-pay'>
-              {billData.paymentStatus === 'not-paid' && (
-                <>
-                  {' '}
-                  <input
-                    className='amount-pay'
-                    value={amountReceived}
-                    placeholder='Amount Received'
-                    onChange={(e) => setAmountReceived(e.target.value)}
-                  />
-                  <p>Balance : {balance} </p>
-                </>
-              )}
+                    {billData.paymentStatus === 'not-paid' && (
+                      <div className='update-inputs'>
+                        <input
+                          type='radio'
+                          name='paymentStatus'
+                          id='paid'
+                          checked={paymentStatus === 'paid'}
+                          onChange={() => setPaymentStatus('paid')}
+                        />
+                        <label className='labels' htmlFor='paid'>
+                          Paid
+                        </label>
+                        <br />
+                        <input
+                          type='radio'
+                          name='paymentStatus'
+                          id='not-paid'
+                          checked={paymentStatus === 'not-paid'}
+                          onChange={() => setPaymentStatus('not-paid')}
+                        />
+                        <label className='labels' htmlFor='not-paid'>
+                          Not Paid
+                        </label>
+                      </div>
+                    )}
 
-              {billData.paymentStatus === 'not-paid' && (
-                <div className='update-inputs'>
-                  <input
-                    type='radio'
-                    name='paymentStatus'
-                    id='paid'
-                    checked={paymentStatus === 'paid'}
-                    onChange={() => setPaymentStatus('paid')}
-                  />
-                  <label className='labels' htmlFor='paid'>
-                    Paid
-                  </label>
-                  <br />
-                  <input
-                    type='radio'
-                    name='paymentStatus'
-                    id='not-paid'
-                    checked={paymentStatus === 'not-paid'}
-                    onChange={() => setPaymentStatus('not-paid')}
-                  />
-                  <label className='labels' htmlFor='not-paid'>
-                    Not Paid
-                  </label>
-                </div>
-              )}
-
-              {billData.deliveryStatus === 'not-Delivered' && (
-                <div className='update-inputs'>
-                  <input
-                    type='radio'
-                    name='deliveryStatus'
-                    id='delivered'
-                    checked={deliveryStatus === 'Delivered'}
-                    onChange={() => setDeliveryStatus('Delivered')}
-                  />
-                  <label className='labels' htmlFor='delivered'>
-                    Delivered
-                  </label>
-                  <br />
-                  <input
-                    type='radio'
-                    name='deliveryStatus'
-                    id='not-delivered'
-                    checked={deliveryStatus === 'not-Delivered'}
-                    onChange={() => setDeliveryStatus('not-Delivered')}
-                  />
-                  <label className='labels' htmlFor='not-delivered'>
-                    Not Delivered
-                  </label>
+                    {billData.deliveryStatus === 'not-Delivered' && (
+                      <div className='update-inputs'>
+                        <input
+                          type='radio'
+                          name='deliveryStatus'
+                          id='delivered'
+                          checked={deliveryStatus === 'Delivered'}
+                          onChange={() => setDeliveryStatus('Delivered')}
+                        />
+                        <label className='labels' htmlFor='delivered'>
+                          Delivered
+                        </label>
+                        <br />
+                        <input
+                          type='radio'
+                          name='deliveryStatus'
+                          id='not-delivered'
+                          checked={deliveryStatus === 'not-Delivered'}
+                          onChange={() => setDeliveryStatus('not-Delivered')}
+                        />
+                        <label className='labels' htmlFor='not-delivered'>
+                          Not Delivered
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                  {(billData.paymentStatus === 'not-paid' ||
+                    billData.deliveryStatus === 'not-Delivered') && (
+                    <button className='save-button' onClick={handleSaveUpdate}>
+                      Save
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -313,16 +321,16 @@ export default function Billing() {
               >
                 Cancel
               </button> */}
-
-              {(billData.paymentStatus === 'not-paid' ||
-                billData.deliveryStatus === 'not-Delivered') && (
-                <button className='save-button' onClick={handleSaveUpdate}>
-                  Save
-                </button>
-              )}
             </div>
             <div className='bt'>
-              <button className='Create-button' onClick={createInvoice}>
+              <button
+                className='Create-button'
+                disabled={
+                  billData.paymentStatus === 'not-paid' ||
+                  billData.deliveryStatus === 'not-Delivered'
+                }
+                onClick={createInvoice}
+              >
                 Create Invoice
               </button>
 
@@ -380,6 +388,9 @@ export default function Billing() {
               </div>
             )
           })}
+      </div>
+      <div className='refresh'>
+        <button onClick={() => fetchData()}>refresh</button>
       </div>
     </div>
   )

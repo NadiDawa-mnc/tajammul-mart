@@ -31,7 +31,6 @@ const PrintComponent = (props) => {
             height={80}
           />
         </div>
-
         <div className='p-bill-customer'>
           <div className='bill-customer-details'>
             <p>Invoice : {props.billData?.orderNumber}</p>
@@ -63,7 +62,6 @@ const PrintComponent = (props) => {
             </p>
           </div>
         </div>
-
         <div className='p-bill-deatils'>
           <h2>Invoice</h2>
           <div className='bill-items'>
@@ -123,8 +121,15 @@ const PrintComponent = (props) => {
             <div>Grand Total:</div>
             <div>{props.billData?.total}</div>
           </div>
-          {/* <p>{props.billData?.paymentStatus}</p>
-          <p>{props.billData?.deliveryStatus}</p> */}
+        </div>
+        <div className='p-bill-bottom'>
+          {' '}
+          {props?.billData.paymentStatus === 'not-paid' && (
+            <p>Your order is not yet paid</p>
+          )}
+          {props?.billData.deliveryStatus === 'not-Delivered' && (
+            <p>Your order is not yet delivered</p>
+          )}
         </div>
       </div>
 

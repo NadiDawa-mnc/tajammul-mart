@@ -16,12 +16,13 @@ export default function Login() {
     } else {
       setError(false)
     }
+
     let response = await fetch('/api/user', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: {
         'Content-Type': 'application/json',
-      }, // Add content-type header to specify JSON
+      },
     })
     response = await response.json()
 
@@ -30,7 +31,13 @@ export default function Login() {
       delete result.password
 
       localStorage.setItem('user', JSON.stringify(result))
-      router.push('/home')
+
+      // Redirect based on the username
+      if (['counter01', 'counter02', 'counter03'].includes(result.username)) {
+        router.push('/home') // Redirect to /home for counter01, counter02, counter03
+      } else if (['admin', 'counter04'].includes(result.username)) {
+        router.push('/') // Redirect to / for admin or counter04
+      }
     } else {
       alert('failed to Login')
     }
