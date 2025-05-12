@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import './billing.css'
 import { IoMdClose } from 'react-icons/io'
 import PrintComponent from '@/app/components/printComp/PrintComponent'
+import PrintComponent2 from '@/app/components/printComp2/PrintComponent2'
 
 export default function Billing() {
   const [orderData, setOrderData] = useState([])
@@ -344,6 +345,7 @@ export default function Billing() {
                 Create Invoice
               </button>
 
+              <PrintComponent2 billData={billData} />
               <PrintComponent billData={billData} />
             </div>
           </div>
