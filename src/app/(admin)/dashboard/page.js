@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import '../billing/billing.css'
 import { IoMdClose } from 'react-icons/io'
 import PrintComponent2 from '@/app/components/printComp2/PrintComponent2'
+import PrintComponent from '@/app/components/printComp/PrintComponent'
 
 export default function Dashboard() {
   const [orderData, setOrderData] = useState([])
@@ -52,6 +53,31 @@ export default function Dashboard() {
     setPaymentStatus(item.paymentStatus || '')
     setDeliveryStatus(item.deliveryStatus || '')
     console.log(item)
+  }
+  const deleteOrder = async () => {
+    if (!billData._id) return
+
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this Invoice?'
+    )
+    if (!confirmDelete) return
+
+    try {
+      const res = await fetch(`/api/orders/${billData._id}`, {
+        method: 'DELETE',
+      })
+
+      if (res.ok) {
+        setBillData([])
+        setAmountReceived('')
+        fetchData()
+      } else {
+        alert('Failed to delete the order.')
+      }
+    } catch (error) {
+      console.error('Delete error:', error)
+      alert('An error occurred while deleting.')
+    }
   }
 
   const handleSaveUpdate = async () => {
@@ -177,7 +203,7 @@ export default function Dashboard() {
                       <th>No.</th>
                       <th>Items</th>
                       <th>Price</th>
-                      <th>Qty</th>
+                      <th>Qty/Mtr</th>
                       <th>Total</th>
                     </tr>
                     <tr style={{ height: '10px' }}></tr>
@@ -223,126 +249,16 @@ export default function Dashboard() {
                 <div>{billData.total}</div>
               </div>
             </div>
-            <div className='bill-alert'>
-              {billData.deliveryStatus === 'Delivered' &&
-                billData.paymentStatus === 'paid' && (
-                  <div className='bill-alert-success'>
-                    <IoCheckmarkCircleSharp
-                      size={30}
-                      style={{ color: '#08841b' }}
-                    />
-                    <p>
-                      Item has been {billData.deliveryStatus}, and Paid by{' '}
-                      {billData.paymentMode}
-                    </p>
-                  </div>
-                )}
+            <div className='bill-alert'></div>
 
-              {(billData.deliveryStatus === 'not-Delivered' ||
-                billData.paymentStatus === 'not-paid') && (
-                <div className='bill-alert-failed'>
-                  <div className='alert-message'>
-                    {' '}
-                    <IoAlertCircleOutline
-                      size={30}
-                      style={{ color: '#f7941d' }}
-                    />
-                    <p>
-                      Item is {billData.deliveryStatus}, and{' '}
-                      {billData.paymentStatus} for
-                    </p>
-                  </div>
-                  <div className='bill-cash-pay'>
-                    {billData.paymentStatus === 'not-paid' && (
-                      <>
-                        {' '}
-                        <input
-                          className='amount-pay'
-                          value={amountReceived}
-                          placeholder='Amount Received'
-                          onChange={(e) => setAmountReceived(e.target.value)}
-                        />
-                        <p>Balance : {balance} </p>
-                      </>
-                    )}
-
-                    {billData.paymentStatus === 'not-paid' && (
-                      <div className='update-inputs'>
-                        <input
-                          type='radio'
-                          name='paymentStatus'
-                          id='paid'
-                          checked={paymentStatus === 'paid'}
-                          onChange={() => setPaymentStatus('paid')}
-                        />
-                        <label className='labels' htmlFor='paid'>
-                          Paid
-                        </label>
-                        <br />
-                        <input
-                          type='radio'
-                          name='paymentStatus'
-                          id='not-paid'
-                          checked={paymentStatus === 'not-paid'}
-                          onChange={() => setPaymentStatus('not-paid')}
-                        />
-                        <label className='labels' htmlFor='not-paid'>
-                          Not Paid
-                        </label>
-                      </div>
-                    )}
-
-                    {billData.deliveryStatus === 'not-Delivered' && (
-                      <div className='update-inputs'>
-                        <input
-                          type='radio'
-                          name='deliveryStatus'
-                          id='delivered'
-                          checked={deliveryStatus === 'Delivered'}
-                          onChange={() => setDeliveryStatus('Delivered')}
-                        />
-                        <label className='labels' htmlFor='delivered'>
-                          Delivered
-                        </label>
-                        <br />
-                        <input
-                          type='radio'
-                          name='deliveryStatus'
-                          id='not-delivered'
-                          checked={deliveryStatus === 'not-Delivered'}
-                          onChange={() => setDeliveryStatus('not-Delivered')}
-                        />
-                        <label className='labels' htmlFor='not-delivered'>
-                          Not Delivered
-                        </label>
-                      </div>
-                    )}
-                  </div>
-                  {(billData.paymentStatus === 'not-paid' ||
-                    billData.deliveryStatus === 'not-Delivered') && (
-                    <button className='save-button' onClick={handleSaveUpdate}>
-                      Save
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div className='bill-footer'>
-              {/* <button
-                onClick={() => {
-                  setBillData([])
-                  setAmountReceived('')
-                }}
-                className='cancel-button'
-              >
-                Cancel
-              </button> */}
-            </div>
+            <div className='bill-footer'></div>
             <div className='bt'>
-              <button className='Create-button'>Create Invoice</button>
+              <button onClick={deleteOrder} className='delete-button'>
+                Delete
+              </button>
 
               <PrintComponent2 billData={billData} />
+              <PrintComponent billData={billData} />
             </div>
           </div>
         </div>
@@ -352,21 +268,25 @@ export default function Dashboard() {
       <div className='dashboard-boxes'>
         <h4
           style={{ textAlign: 'center', marginTop: '10px' }}
-          className='table-heading'
+          className='dashboard-heading'
         >
-          Total Sales
+          Total Sales:
         </h4>
-        <h1 style={{ textAlign: 'center' }}>{grandTotal}</h1>
+        <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+          {grandTotal}
+        </h1>
       </div>
 
       <div className='dashboard-boxes'>
         <h4
           style={{ textAlign: 'center', marginTop: '10px' }}
-          className='table-heading'
+          className='dashboard-heading'
         >
-          Total Customers
+          Total Customers:
         </h4>
-        <h1 style={{ textAlign: 'center' }}>{orderData.length}</h1>
+        <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+          {orderData.length}
+        </h1>
       </div>
       <div className='table'>
         <h2 style={{ textAlign: 'center' }} className='table-heading'>

@@ -35,3 +35,29 @@ export async function PUT(req, { params }) {
     )
   }
 }
+export async function DELETE(_request, { params }) {
+  const { id } = await params
+
+  await mongoose.connect(connectionStr)
+
+  try {
+    const deletedOrder = await OrderSchema.findByIdAndDelete(id)
+
+    if (!deletedOrder) {
+      return NextResponse.json(
+        { success: false, message: 'Order not found' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json(
+      { success: true, data: deletedOrder },
+      { status: 200 }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: error.message },
+      { status: 500 }
+    )
+  }
+}

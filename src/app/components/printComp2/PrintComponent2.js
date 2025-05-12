@@ -35,12 +35,12 @@ const PrintComponent = (props) => {
         <div className='from-address' style={{ fontSize: '2.2rem' }}>
           <h3>From</h3>
 
-          <p className='bold'>Junaid Sufi</p>
+          <p className='bold'>Tajammul Mart</p>
 
           <p>
             Markaz Garden, Poonoor, Unnikkulam PO, Kozhikkode, Kerala, 673574
             <br />
-            Phone: 9449999999
+            Phone: 92071 19168
           </p>
         </div>
 
