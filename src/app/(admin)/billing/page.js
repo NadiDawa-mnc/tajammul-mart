@@ -52,7 +52,6 @@ export default function Billing() {
     if (!billData._id) return
 
     const updated = {
-      billedStatus,
       paymentStatus,
       amountReceived,
       deliveryStatus,

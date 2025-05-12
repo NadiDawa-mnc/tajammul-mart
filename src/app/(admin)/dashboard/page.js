@@ -366,7 +366,7 @@ export default function Dashboard() {
         >
           Total Customers
         </h4>
-        <h1 style={{ textAlign: 'center' }}>2</h1>
+        <h1 style={{ textAlign: 'center' }}>{orderData.length}</h1>
       </div>
       <div className='table'>
         <h2 style={{ textAlign: 'center' }} className='table-heading'>

@@ -93,7 +93,7 @@ export default function AllDress({ addToCart }) {
                     <div>
                       <h2 className='allproduct-name'>{item.name}</h2>
                       <p className='allproduct-desc'> {item.description}</p>
-                      <p className='allproduct-qty'> Qty: {item.stock}</p>
+                      {/* <p className='allproduct-qty'> Qty: {item.stock}</p> */}
                     </div>
 
                     <div className='btm'>

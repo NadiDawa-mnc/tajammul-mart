@@ -73,10 +73,10 @@ const PrintComponent = (props) => {
             >
               <thead>
                 <tr>
-                  <th className='ts no'>No.</th>
+                  <th className='ts nos'>No.</th>
                   <th className='ts item'>Items</th>
                   <th className='ts'>Price</th>
-                  <th className='ts'>Qty</th>
+                  <th className='ts'>Qty/Mtr</th>
                   <th className='ts all'>Total</th>
                 </tr>
                 <tr style={{ height: '10px' }}></tr>

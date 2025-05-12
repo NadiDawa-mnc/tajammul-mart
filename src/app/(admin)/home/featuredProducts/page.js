@@ -33,7 +33,7 @@ import Image from 'next/image'
 export default function FeaturedProduct({ addToCart }) {
   return (
     <div className='feature-container'>
-      <p>Featured Products</p>
+      <p className='feature-title'>Featured Products</p>
 
       <div className='feature-product-conatiner'>
         {data.map((item, index) => (

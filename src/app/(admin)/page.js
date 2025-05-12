@@ -10,15 +10,15 @@ import AllDress from '../components/allDress/allDress'
 
 export default function Hero() {
   const defaultMeters = {
-    1: 1,
-    2: 1,
+    1: 1.8,
+    2: 1.8,
     3: 4,
-    4: 1,
+    4: 1.8,
     5: 1.8,
-    6: 1,
-    7: 1,
-    8: 1,
-    9: 1,
+    6: 1.8,
+    7: 1.8,
+    8: 1.8,
+    9: 1.8,
   }
   const [cartItem, setCartItem] = useState([])
   const [meters, setMeters] = useState(defaultMeters)
@@ -56,10 +56,7 @@ export default function Hero() {
     setCartItem(cartItems)
     console.log(cartItems)
 
-    setMeters((prev) => ({
-      ...prev,
-      [item._id]: 1,
-    }))
+    setMeters(defaultMeters)
   }
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

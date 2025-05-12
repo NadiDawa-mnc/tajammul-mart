@@ -7,7 +7,7 @@
   border-radius: 20px;
 }
 
-.feature-container p {
+.feature-title {
   height: 60px;
   text-align: left;
   padding: 20px 10px;
@@ -101,7 +101,9 @@
   padding-top: 10px;
   text-align: center;
 }
-
+.perMeter {
+  font-size: 0.75rem;
+}
 .sp-deatils {
   display: flex;
 }
@@ -124,8 +126,10 @@
     height: 140px;
     text-align: center;
   }
-
-  .feature-container p {
+  .product-price {
+    padding-top: 5px;
+  }
+  .feature-title {
     height: 40px;
     padding: 15px 10px;
   }

@@ -165,3 +165,21 @@
   padding-right: 20px;
   width: 100px;
 }
+
+.nos {
+  width: 30px;
+  text-align: left;
+  padding-left: 20px;
+}
+.item {
+  width: 270px;
+  text-align: left;
+}
+
+.from-address {
+  width: 90%;
+}
+
+.cu-name {
+  text-transform: capitalize;
+}

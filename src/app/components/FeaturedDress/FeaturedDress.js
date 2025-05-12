@@ -60,7 +60,7 @@ export default function FeaturedDress({ addToCartMeter, meters, setMeters }) {
   return (
     <>
       <div className='feature-container'>
-        <p> Premimum Quality</p>
+        <p className='feature-title'> Premimum Quality</p>
 
         <div className='feature-product-conatiner'>
           {premium.map((item, index) => (
@@ -79,8 +79,18 @@ export default function FeaturedDress({ addToCartMeter, meters, setMeters }) {
                 <div className='tab-view'>
                   <h2 className='product-name'>{item.name}</h2>
                   <span className='product-desc'>{item.description}</span>
-
-                  <h3 className='product-price'> ₹{item.price}</h3>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {' '}
+                    <h3 className='product-price'> ₹{item.price} </h3>
+                    <p className='perMeter'>per meter</p>
+                  </div>
                 </div>
                 <div className='btm'>
                   <input
@@ -116,7 +126,7 @@ export default function FeaturedDress({ addToCartMeter, meters, setMeters }) {
         className='feature-container'
         style={{ marginTop: '1rem', backgroundColor: '#fea9005a' }}
       >
-        <p>Standard Quality</p>
+        <p className='feature-title'> Standard Quality</p>
 
         <div className='feature-product-conatiner'>
           {data.map((item, index) => (
@@ -136,7 +146,18 @@ export default function FeaturedDress({ addToCartMeter, meters, setMeters }) {
                   <h2 className='product-name'>{item.name}</h2>
                   <span className='product-desc'>{item.description}</span>
 
-                  <h3 className='product-price'> ₹{item.price}</h3>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {' '}
+                    <h3 className='product-price'> ₹{item.price} </h3>
+                    <p className='perMeter'>per meter</p>
+                  </div>
                 </div>
 
                 <div className='btm'>
