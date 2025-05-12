@@ -5,26 +5,76 @@ import { useEffect, useState } from 'react'
 import './allProducts.css'
 import Image from 'next/image'
 
+const allProductData = [
+  {
+    _id: 111,
+    name: 'Khulsa',
+    img: '/kulsa.jpg',
+    description: 'Kithabul Fiqh',
+    price: 240,
+  },
+  {
+    _id: 112,
+    name: 'Swarf',
+    description: 'Meezan,Ajnas,Zanjan',
+
+    img: '/swarf.jpeg',
+    price: 1060,
+  },
+  {
+    _id: 113,
+    name: 'Iqra part 01',
+    description: 'Arabic language book',
+
+    img: '/iqra.jpeg',
+    price: 150,
+  },
+  {
+    _id: 114,
+    name: 'Workbook 01',
+    description: 'for Ajnas',
+
+    img: '/wk-ajnas.jpeg',
+    price: 150,
+  },
+  {
+    _id: 115,
+    name: 'Workbook 02',
+    description: 'fro Meezan',
+
+    img: '/wk-mezan.jpeg',
+    price: 150,
+  },
+  {
+    _id: 116,
+    name: 'Workbook 03',
+    description: 'fro Zanjan',
+
+    img: '/wk-zanjan.jpeg',
+    price: 150,
+  },
+]
+
 export default function AllProducts({ addToCart }) {
-  const [productData, setProductData] = useState([])
+  // const [productData, setProductData] = useState([])
 
-  useEffect(() => {
-    loadProduct()
-  }, [])
+  // useEffect(() => {
+  //   loadProduct()
+  // }, [])
 
-  const loadProduct = async () => {
-    let response = await fetch('/api/products')
-    response = await response.json()
-    if (response.success) {
-      setProductData(response.result)
-    }
-  }
+  // const loadProduct = async () => {
+  //   let response = await fetch('/api/products')
+  //   response = await response.json()
+  //   if (response.success) {
+  //     setProductData(response.result)
+  //   }
+  // }
 
   return (
     <div className='allproduct-container'>
       <div className='allproduct-product-conatiner'>
-        {productData.length > 0
-          ? productData.map((item, index) => {
+        {allProductData.length > 0
+          ? allProductData.map((item, index) => {
               let strikePrice = item.price + item.price * 0.1
               return (
                 <div key={index} className='allproduct-product'>
@@ -39,7 +89,7 @@ export default function AllProducts({ addToCart }) {
                     <div>
                       <h2 className='allproduct-name'>{item.name}</h2>
                       <p className='allproduct-desc'> {item.description}</p>
-                      <p className='allproduct-qty'> Qty: {item.stock}</p>
+                      {/* <p className='allproduct-qty'> Qty: {item.stock}</p> */}
                     </div>
 
                     <div className='btm'>

@@ -2,6 +2,7 @@
 import { IoAlertCircleOutline } from 'react-icons/io5'
 import { IoCheckmarkCircleSharp } from 'react-icons/io5'
 import { LuPrinter } from 'react-icons/lu'
+import { IoMdRefresh } from 'react-icons/io'
 
 import { useEffect, useState } from 'react'
 import './billing.css'
@@ -15,6 +16,7 @@ export default function Billing() {
   const [paymentStatus, setPaymentStatus] = useState('')
   const [deliveryStatus, setDeliveryStatus] = useState('')
   const [billedStatus, setBilledStatus] = useState(true)
+  const [spinning, setSpinning] = useState(false)
 
   let balance = amountReceived - billData.total
 
@@ -23,10 +25,18 @@ export default function Billing() {
   }, [])
 
   const fetchData = async () => {
-    const data = await fetch('/api/orders')
-    const result = await data.json()
-    console.log(result)
-    setOrderData(result.result)
+    setSpinning(true) // start spinning
+
+    try {
+      const data = await fetch('/api/orders')
+      const result = await data.json()
+      console.log(result)
+      setOrderData(result.result)
+    } catch (error) {
+      console.error('Failed to fetch orders:', error)
+    } finally {
+      setTimeout(() => setSpinning(false), 1000) // smooth stop after 1s
+    }
   }
 
   const viewBill = (item) => {
@@ -345,12 +355,15 @@ export default function Billing() {
       <div className='table'>
         <div className='table-header'>
           <p className='no'>No</p>
-          <p className='s'>Order No.</p>
+          <p className='s'>Counter</p>
           <p className='s'>Name</p>
           <p className='s'>Campus</p>
           <p className='s'>Payment Status</p>
           <p className='s'>Delivery Status</p>
           <p className='no'>Total</p>
+          <button className='refresh-button' onClick={fetchData}>
+            <IoMdRefresh size={30} className={spinning ? 'spin' : ''} />
+          </button>
         </div>
 
         {orderData &&
@@ -382,15 +395,15 @@ export default function Billing() {
                   {item.deliveryStatus}
                 </p>
                 <p className='no'>{item.total}</p>
-                <button onClick={() => viewBill(item)} className='1'>
+                <button onClick={() => viewBill(item)} className='viewbtn'>
                   View
                 </button>
+                {/* <button onClick={() => printAddress(item)} className='viewbtn'>
+                  Print Address
+                </button> */}
               </div>
             )
           })}
-      </div>
-      <div className='refresh'>
-        <button onClick={() => fetchData()}>refresh</button>
       </div>
     </div>
   )

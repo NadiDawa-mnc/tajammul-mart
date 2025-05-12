@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const OrderModel = new mongoose.Schema({
   customerName: String,
   campus: String,
+  address: String,
   paymentMode: String,
   deliveryStatus: String,
   paymentStatus: String,

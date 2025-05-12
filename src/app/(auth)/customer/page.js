@@ -8,9 +8,10 @@ import { useRouter } from 'next/navigation'
 export default function Customer() {
   const router = useRouter()
   const [cartItems, setCartItems] = useState([])
-  const [Name, setName] = useState([])
-  const [campus, setCampus] = useState([])
+  const [Name, setName] = useState('')
+  const [campus, setCampus] = useState('')
   const [user, setUser] = useState('')
+  const [address, setAddress] = useState('')
   const [orderNumber, setOrderNumber] = useState('')
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function Customer() {
 
   const placeOrder = async () => {
     setLoading(true) // Start loading
+
     const paymentMode = document.querySelector(
       'input[name="payment"]:checked'
     )?.id
@@ -44,11 +46,21 @@ export default function Customer() {
       'input[name="paymentStatus"]:checked'
     )?.id
 
+    // Validation check
+    if (!Name || !campus || !paymentMode || !deliveryStatus || !paymentStatus) {
+      alert(
+        'Please fill in all required fields: Name, Campus, Payment Mode, Delivery Status, and Payment Status.'
+      )
+      setLoading(false)
+      return
+    }
+
     const cleanedCartItems = cartItems.map(({ _id, ...rest }) => rest)
 
     const orderData = {
       customerName: Name,
       campus: campus,
+      address: address,
       paymentMode,
       deliveryStatus,
       paymentStatus,
@@ -77,11 +89,11 @@ export default function Customer() {
 
         // Redirect based on the user's username
         if (user === 'counter04') {
-          router.push('/') // Redirect to home if user is counter03
+          router.push('/')
         } else if (
           ['counter01', 'counter02', 'counter03', 'admin'].includes(user)
         ) {
-          router.push('/home') // Redirect to /home if user is counter01 or counter02
+          router.push('/home')
         }
       } else {
         const errorData = await res.json()
@@ -90,7 +102,7 @@ export default function Customer() {
     } catch (err) {
       console.error('Network error submitting order:', err)
     } finally {
-      setLoading(false) // Stop loading regardless of success or error
+      setLoading(false)
     }
   }
 
@@ -122,7 +134,17 @@ export default function Customer() {
                   value={campus}
                 />
               </div>
+              <div>
+                <input
+                  className='input'
+                  type='text'
+                  placeholder='Address (optional)'
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
+                />
+              </div>
             </div>
+
             <div className='customer-payment-mode'>
               <p className='title-01'>Payment Mode</p>
               <div>
