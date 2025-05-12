@@ -105,7 +105,7 @@
 .sp-deatils {
   display: flex;
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1400px) {
   .feature-container {
     width: 660px;
     height: 330px;

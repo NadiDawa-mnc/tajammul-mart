@@ -37,19 +37,18 @@
   box-sizing: border-box;
   max-height: 100vh;
   overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.Bill-box {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.bill-box {
   width: 800px;
   min-height: 800px;
   height: fit-content;
   background-color: #ffffff;
   border-radius: 10px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
   padding: 30px 30px;
   display: flex;
   flex-direction: column;
@@ -276,4 +275,13 @@
   position: absolute;
   bottom: 100px;
   right: 100px;
+}
+
+@media screen and (max-width: 1400px) {
+  .bill-box {
+    width: 600px;
+    min-height: 600px;
+
+    top: 30px;
+  }
 }

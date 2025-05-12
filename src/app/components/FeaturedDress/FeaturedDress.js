@@ -22,10 +22,10 @@ const premium = [
   },
   {
     _id: 3,
-    name: 'Qurbani',
-    description: 'Kanthoora Cloth',
+    name: 'Dastar',
+    description: 'Nurani',
     img: '/qurbani.jpg',
-    price: 290,
+    price: 85,
   },
 ]
 

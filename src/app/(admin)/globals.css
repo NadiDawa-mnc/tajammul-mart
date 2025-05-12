@@ -72,10 +72,15 @@ html {
 .printable-content {
   display: none;
 }
-
 @media only screen and (max-width: 1200px) {
   .main-layout {
     padding: 18px 50px;
+    padding-bottom: 0;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .main-layout {
+    padding: 18px 80px;
     padding-bottom: 0;
   }
   html {

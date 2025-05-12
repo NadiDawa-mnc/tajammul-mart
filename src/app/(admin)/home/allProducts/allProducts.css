@@ -121,7 +121,7 @@
   font-weight: 200;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1400px) {
   .allproduct-container {
     width: 630px;
     margin-left: 20px;

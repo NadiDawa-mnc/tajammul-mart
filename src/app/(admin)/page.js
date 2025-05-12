@@ -12,7 +12,7 @@ export default function Hero() {
   const defaultMeters = {
     1: 1,
     2: 1,
-    3: 1,
+    3: 4,
     4: 1,
     5: 1.8,
     6: 1,

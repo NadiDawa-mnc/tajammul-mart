@@ -44,7 +44,7 @@ const productData = [
     name: 'Lunki -color ',
     description: '',
 
-    img: '/voile.jpg',
+    img: '/lunki.jpg',
 
     price: 250,
   },

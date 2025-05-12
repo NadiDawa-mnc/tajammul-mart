@@ -103,7 +103,7 @@ export default function Billing() {
     <div className='billing-container'>
       {billData.cartItems ? (
         <div className='Bill-view-container'>
-          <div className='Bill-box'>
+          <div className='bill-box'>
             <div className='bill-header'>
               <h2>Invoice</h2>
               <p>
