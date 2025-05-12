@@ -3,6 +3,7 @@ import { IoAlertCircleOutline } from 'react-icons/io5'
 import { IoCheckmarkCircleSharp } from 'react-icons/io5'
 import { LuPrinter } from 'react-icons/lu'
 import { IoMdRefresh } from 'react-icons/io'
+import { MdDelete } from 'react-icons/md'
 
 import { useEffect, useState } from 'react'
 import './billing.css'
@@ -37,6 +38,34 @@ export default function Billing() {
       console.error('Failed to fetch orders:', error)
     } finally {
       setTimeout(() => setSpinning(false), 1000) // smooth stop after 1s
+    }
+  }
+  const deleteOrder = async (id) => {
+    if (!id) return
+
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this order?'
+    )
+    if (!confirmDelete) return
+
+    try {
+      const res = await fetch(`/api/orders/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (res.ok) {
+        // If deleted item is currently viewed, reset the view
+        if (billData._id === id) {
+          setBillData([])
+          setAmountReceived('')
+        }
+        fetchData()
+      } else {
+        alert('Failed to delete the order.')
+      }
+    } catch (error) {
+      console.error('Delete error:', error)
+      alert('An error occurred while deleting.')
     }
   }
 
@@ -399,6 +428,16 @@ export default function Billing() {
                 <button onClick={() => viewBill(item)} className='viewbtn'>
                   View
                 </button>
+                <MdDelete
+                  onClick={() => deleteOrder(item._id)}
+                  style={{
+                    color: 'rgba(76, 76, 76, 0.49)',
+                    cursor: 'pointer',
+                    marginLeft: '10px',
+                  }}
+                  size={25}
+                  className='delete'
+                />
                 {/* <button onClick={() => printAddress(item)} className='viewbtn'>
                   Print Address
                 </button> */}
