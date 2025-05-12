@@ -49,25 +49,19 @@ export default function Hero() {
     }
 
     const cartItems = cartItem.slice()
-    let alreadyInCart = false
 
-    cartItems.forEach((cartItem) => {
-      if (cartItem._id === item._id) {
-        alreadyInCart = true
-      }
-    })
-
-    if (!alreadyInCart) {
-      cartItems.push({ ...item, count: Number(length) })
-    }
+    // Always add as a new item with a unique key
+    cartItems.push({ ...item, count: Number(length), _uid: Date.now() })
 
     setCartItem(cartItems)
     console.log(cartItems)
+
     setMeters((prev) => ({
       ...prev,
       [item._id]: 1,
     }))
   }
+
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const removeFromCart = (indexToRemove) => {
     setCartItem((prev) => prev.filter((_, index) => index !== indexToRemove))
