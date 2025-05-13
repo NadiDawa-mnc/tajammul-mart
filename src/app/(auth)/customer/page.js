@@ -88,12 +88,14 @@ export default function Customer() {
         )
 
         // Redirect based on the user's username
-        if (user === 'counter04') {
-          router.push('/')
+        if (user === 'admin') {
+          router.push('/billing')
         } else if (
           ['counter01', 'counter02', 'counter03', 'admin'].includes(user)
         ) {
           router.push('/home')
+        } else if (['counter04', 'counter05'].includes(user)) {
+          router.push('/')
         }
       } else {
         const errorData = await res.json()
