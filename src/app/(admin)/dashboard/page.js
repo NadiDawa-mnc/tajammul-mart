@@ -289,28 +289,9 @@ export default function Dashboard() {
             Total Sales:
           </h4>
           <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
-            {/* {grandTotal} */}
+            {grandTotal}
           </h1>
         </div>
-
-        {Object.entries(itemTotals).map(([name, total]) => (
-          <div key={name} className='dashboard-boxes'>
-            <h4
-              className='dashboard-heading'
-              style={{ textAlign: 'center', marginTop: '10px' }}
-            >
-              {name}
-            </h4>
-            <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
-              {total.toFixed(0)}
-            </h1>
-            <p style={{ textAlign: 'center' }}>
-              {name === 'Pure Lea 60' || name === 'Pure Lea 44'
-                ? 'meter'
-                : 'pcs'}
-            </p>
-          </div>
-        ))}
 
         <div className='dashboard-boxes'>
           <h4
@@ -323,6 +304,37 @@ export default function Dashboard() {
             {orderData.length}
           </h1>
         </div>
+
+        {Object.entries(itemTotals).map(([name, total]) => (
+          <div key={name} className='dashboard-boxes'>
+            <h4
+              className='dashboard-heading'
+              style={{ textAlign: 'center', marginTop: '10px' }}
+            >
+              {name}
+            </h4>
+            <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+              {name === 'Pure Lea 60' ||
+              name === 'Pure Lea 44' ||
+              name === 'Dastar' ||
+              name === 'Cotton Linen' ||
+              name === 'Cotton Linen Club' ||
+              name === '60×60 Cotton Linen'
+                ? total.toFixed(2)
+                : total.toFixed(0)}
+            </h1>
+            <p style={{ textAlign: 'center' }}>
+              {name === 'Pure Lea 60' ||
+              name === 'Pure Lea 44' ||
+              name === 'Dastar' ||
+              name === 'Cotton Linen' ||
+              name === 'Cotton Linen Club' ||
+              name === '60×60 Cotton Linen'
+                ? 'meter'
+                : 'pcs'}
+            </p>
+          </div>
+        ))}
       </div>
       <div className='table'>
         <h2 style={{ textAlign: 'center' }} className='table-heading'>
