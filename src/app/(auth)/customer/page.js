@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 export default function Customer() {
   const router = useRouter()
   const [cartItems, setCartItems] = useState([])
-  const [Name, setName] = useState('')
+  const [Name, setName] = useState('anas')
   const [campus, setCampus] = useState('')
   const [user, setUser] = useState('')
   const [address, setAddress] = useState('')
@@ -47,9 +47,9 @@ export default function Customer() {
     )?.id
 
     // Validation check
-    if (!Name || !campus || !paymentMode || !deliveryStatus || !paymentStatus) {
+    if (!paymentMode || !deliveryStatus || !paymentStatus) {
       alert(
-        'Please fill in all required fields: Name, Campus, Payment Mode, Delivery Status, and Payment Status.'
+        'Please fill in all required fields:  Payment Mode, Delivery Status, and Payment Status.'
       )
       setLoading(false)
       return
