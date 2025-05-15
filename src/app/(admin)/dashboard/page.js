@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [billedStatus, setBilledStatus] = useState(true)
   const [spinning, setSpinning] = useState(false)
   const [grandTotal, setGrandTotal] = useState(0)
+  const [itemTotals, setItemTotals] = useState(0)
 
   let balance = amountReceived - billData.total
 
@@ -36,10 +37,24 @@ export default function Dashboard() {
 
       const orders = result.result
       setOrderData(orders)
+      console.log(orders)
 
       // Calculate grand total
       const totalAmount = orders.reduce((sum, order) => sum + order.total, 0)
+
+      const itemTotals = {}
+
+      orders.forEach((order) => {
+        order.cartItems.forEach((item) => {
+          if (!itemTotals[item.name]) {
+            itemTotals[item.name] = 0
+          }
+          itemTotals[item.name] += item.count
+        })
+      })
+
       setGrandTotal(totalAmount)
+      setItemTotals(itemTotals)
     } catch (error) {
       console.error('Failed to fetch orders:', error)
     } finally {
@@ -265,28 +280,49 @@ export default function Dashboard() {
       ) : (
         ''
       )}
-      <div className='dashboard-boxes'>
-        <h4
-          style={{ textAlign: 'center', marginTop: '10px' }}
-          className='dashboard-heading'
-        >
-          Total Sales:
-        </h4>
-        <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
-          {grandTotal}
-        </h1>
-      </div>
+      <div className='dashboard-boxes-container'>
+        <div className='dashboard-boxes'>
+          <h4
+            style={{ textAlign: 'center', marginTop: '10px' }}
+            className='dashboard-heading'
+          >
+            Total Sales:
+          </h4>
+          <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+            {/* {grandTotal} */}
+          </h1>
+        </div>
 
-      <div className='dashboard-boxes'>
-        <h4
-          style={{ textAlign: 'center', marginTop: '10px' }}
-          className='dashboard-heading'
-        >
-          Total Customers:
-        </h4>
-        <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
-          {orderData.length}
-        </h1>
+        {Object.entries(itemTotals).map(([name, total]) => (
+          <div key={name} className='dashboard-boxes'>
+            <h4
+              className='dashboard-heading'
+              style={{ textAlign: 'center', marginTop: '10px' }}
+            >
+              {name}
+            </h4>
+            <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+              {total.toFixed(0)}
+            </h1>
+            <p style={{ textAlign: 'center' }}>
+              {name === 'Pure Lea 60' || name === 'Pure Lea 44'
+                ? 'meter'
+                : 'pcs'}
+            </p>
+          </div>
+        ))}
+
+        <div className='dashboard-boxes'>
+          <h4
+            style={{ textAlign: 'center', marginTop: '10px' }}
+            className='dashboard-heading'
+          >
+            Total Customers:
+          </h4>
+          <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
+            {orderData.length}
+          </h1>
+        </div>
       </div>
       <div className='table'>
         <h2 style={{ textAlign: 'center' }} className='table-heading'>

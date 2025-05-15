@@ -25,3 +25,10 @@
   color: #1963c4;
   font-weight: 800;
 }
+
+.dashboard-boxes-container {
+  display: flex;
+  gap: 20px;
+  width: 50%;
+  flex-wrap: wrap;
+}
