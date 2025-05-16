@@ -8,26 +8,26 @@ import Image from 'next/image'
 const allProductData = [
   {
     _id: 111,
-    name: 'Khulsa',
+    name: 'Khulsathul Fiqh islami',
     img: '/kulsa.jpg',
     description: 'Kithabul Fiqh',
-    price: 240,
+    price: 310,
   },
   {
     _id: 112,
-    name: 'Swarf',
+    name: 'Kithabu Saraf',
     description: 'Meezan,Ajnas,Zanjan',
 
     img: '/swarf.jpeg',
-    price: 1060,
+    price: 120,
   },
   {
     _id: 113,
-    name: 'Iqra part 01',
-    description: 'Arabic language book',
+    name: 'Kithabu Nahv',
+    description: 'Awamil, Takveemul Lisan',
 
-    img: '/iqra.jpeg',
-    price: 150,
+    img: '/nahv.jpeg',
+    price: 80,
   },
   {
     _id: 114,
@@ -35,23 +35,31 @@ const allProductData = [
     description: 'for Ajnas',
 
     img: '/wk-ajnas.jpeg',
-    price: 150,
+    price: 30,
   },
   {
     _id: 115,
     name: 'Workbook 02',
-    description: 'fro Meezan',
+    description: 'for Meezan',
 
     img: '/wk-mezan.jpeg',
-    price: 150,
+    price: 45,
   },
   {
     _id: 116,
     name: 'Workbook 03',
-    description: 'fro Zanjan',
+    description: 'for Sanjan',
 
     img: '/wk-zanjan.jpeg',
-    price: 150,
+    price: 35,
+  },
+  {
+    _id: 117,
+    name: 'Kithabu Thazkiya',
+    description: 'for 8th Standard',
+
+    img: '/thazkiya.jpeg',
+    price: 55,
   },
 ]
 

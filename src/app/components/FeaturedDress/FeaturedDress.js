@@ -39,7 +39,7 @@ const data = [
   },
   {
     _id: 5,
-    name: 'Cotton Linen Club',
+    name: 'Cotton Linen Club/ 60×60 ',
     description: 'Kurtha Cloth',
 
     img: '/linen-club.jpg',
@@ -47,11 +47,11 @@ const data = [
   },
   {
     _id: 6,
-    name: '60×60 Cotton Linen',
-    description: 'Kurtha Cloth',
+    name: 'Kanthoora Cloth',
+    description: 'Qurbani',
 
     img: '/60x60.jpg',
-    price: 280,
+    price: 290,
   },
 ]
 
