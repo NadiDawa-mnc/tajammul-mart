@@ -61,6 +61,30 @@ const allProductData = [
     img: '/thazkiya.jpeg',
     price: 55,
   },
+  {
+    _id: 118,
+    name: 'Kifayathul Awaam',
+    description: 'for Plus one',
+
+    img: '/kifayathul.jpeg',
+    price: 12,
+  },
+  {
+    _id: 119,
+    name: 'Hasharathu Kuthub',
+    description: 'path kithab',
+
+    img: '/Hasharathu.jpeg',
+    price: 40,
+  },
+  {
+    _id: 129,
+    name: 'C7 Copy',
+    description: 'Arabic copy writing',
+
+    img: '/copy.jpeg',
+    price: 40,
+  },
 ]
 
 export default function AllProducts({ addToCart }) {

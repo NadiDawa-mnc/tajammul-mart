@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 export default function Customer() {
   const router = useRouter()
   const [cartItems, setCartItems] = useState([])
-  const [Name, setName] = useState('anas')
+  const [Name, setName] = useState('')
   const [campus, setCampus] = useState('')
   const [user, setUser] = useState('')
   const [address, setAddress] = useState('')
