@@ -289,7 +289,7 @@ export default function Dashboard() {
             Total Sales:
           </h4>
           <h1 className='dashboard-hilight' style={{ textAlign: 'center' }}>
-            {grandTotal}
+            {/* {grandTotal} */} N/A
           </h1>
         </div>
 
