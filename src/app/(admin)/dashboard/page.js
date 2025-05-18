@@ -319,7 +319,8 @@ export default function Dashboard() {
               name === 'Dastar' ||
               name === 'Cotton Linen' ||
               name === 'Cotton Linen Club' ||
-              name === '60×60 Cotton Linen'
+              name === '60×60 Cotton Linen' ||
+              name === 'Kanthoora Cloth'
                 ? total.toFixed(2)
                 : total.toFixed(0)}
             </h1>
@@ -329,7 +330,8 @@ export default function Dashboard() {
               name === 'Dastar' ||
               name === 'Cotton Linen' ||
               name === 'Cotton Linen Club' ||
-              name === '60×60 Cotton Linen'
+              name === '60×60 Cotton Linen' ||
+              name === 'Kanthoora Cloth'
                 ? 'meter'
                 : 'pcs'}
             </p>
