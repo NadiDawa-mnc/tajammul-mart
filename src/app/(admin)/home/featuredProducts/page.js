@@ -6,18 +6,18 @@ import { FaCartShopping } from 'react-icons/fa6'
 const data = [
   {
     _id: 1,
-    name: 'Premium Kit',
+    name: 'Junior Kit (8th)',
     img: '/kit-pre.jpg',
-    description: '6 Kithab+10 Notebook',
-    price: 1560,
+    description: '8 Kithab + 10 Notebook',
+    price: 1300,
   },
   {
     _id: 2,
-    name: 'Secondary Kit',
-    description: '6 Kithab Only',
+    name: 'Senior Kit (+1)',
+    description: '10 Kithab + 10 Notebook',
 
     img: '/kit-sec.jpg',
-    price: 1060,
+    price: 1350,
   },
   {
     _id: 3,

@@ -39,8 +39,8 @@ const data = [
   },
   {
     _id: 5,
-    name: 'Linen Club/ 60×60 ',
-    description: 'Kurtha Cloth',
+    name: 'Cotton Linen Club',
+    description: 'Linen Club/ 60×60',
 
     img: '/linen-club.jpg',
     price: 300,
