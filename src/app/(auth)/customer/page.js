@@ -5,6 +5,46 @@ import './customer.css'
 import GPayQRCode from '@/app/components/gpay/gpay'
 import { useRouter } from 'next/navigation'
 
+const campuses = [
+  'Imam Rabbani, Kanthapuram',
+  'Imam Shafi, Busthanabad',
+  'Darul Hidaya, Engapuzha',
+  'Suhada, Omanoor',
+  'ISRA, Vadanappally',
+  'Baithul Izza, Narikuni',
+  'Dalaelul Khairat, Kakkidipuram',
+  'Markaz Al Bilal, Pattambi',
+  'Markasunnajath, Ekarool',
+  'Jamalulaily Campus, Chelari',
+  'Al Munawara, Kollam',
+  'Markazul Huda, Chenganassery',
+  'Kamaliyya Campus, Mayyil',
+  'Al Zahra, Paleri',
+  'Darul Fateh, Thodupuzha',
+  'Hasaniyya, Aykkarappadi',
+  'CM Markaz, Mambeethi',
+  'Dinnorain, Naduvannoor',
+  'Hasanul Basari, Muttam',
+  'PMSM Islamic, Centre Kuttashery',
+  'Mambaul Huda, Kechery',
+  'Al-Furqan, Thekkum Thottam',
+  'Masjid Al Fathah, Kondotty',
+  'Asas, Padne',
+  'Jamiul Areesh, Keralapuram',
+  'Darul Quran, Perambra',
+  'Academia Ashabul Badr, Mananchira',
+  'Badrul Huda Academy, Panamaram',
+  'CM Centre, Kongad',
+  'Malharul Islam Academy, Thodupuzha',
+  'Ibnu Bathutha, Krishnapuram',
+  'Ahlu Suffa Dars, Thathoor',
+  'Madeenathu CM Academy, Chilanjichal',
+  'Ahlu Suffa Dars, Valapattanam',
+  'Makhdoomiyya Academy, Koothuparamba',
+  'Juma Masjid, Ayiroor',
+  'Juma Masjid, Peringad',
+]
+
 export default function Customer() {
   const router = useRouter()
   const [cartItems, setCartItems] = useState([])
@@ -118,6 +158,20 @@ export default function Customer() {
             <div className='customer-details-input'>
               <p className='title-01'>Customer Details</p>
               <div>
+                <select
+                  className='input-s'
+                  onChange={(e) => setCampus(e.target.value)}
+                  value={campus}
+                >
+                  <option value=''>~Select Campus~</option>
+                  {campuses.map((c, idx) => (
+                    <option key={idx} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <input
                   className='input'
                   type='text'
@@ -127,15 +181,6 @@ export default function Customer() {
                 />
               </div>
 
-              <div>
-                <input
-                  className='input'
-                  type='text'
-                  placeholder='Campus'
-                  onChange={(e) => setCampus(e.target.value)}
-                  value={campus}
-                />
-              </div>
               <div>
                 <input
                   className='input'

@@ -8,16 +8,16 @@ const data = [
     _id: 1,
     name: 'Junior Kit (8th)',
     img: '/kit-pre.jpg',
-    description: '8 Kithab + 10 Notebook',
+    description: '10 Kithab + 10 Notebook',
     price: 1300,
   },
   {
     _id: 2,
     name: 'Senior Kit (+1)',
-    description: '10 Kithab + 10 Notebook',
+    description: '11 Kithab + 10 Notebook',
 
     img: '/kit-sec.jpg',
-    price: 1350,
+    price: 1450,
   },
   {
     _id: 3,
@@ -25,7 +25,7 @@ const data = [
     description: 'JMN Notebook',
 
     img: '/note.jpg',
-    price: 40,
+    price: 45,
   },
 ]
 

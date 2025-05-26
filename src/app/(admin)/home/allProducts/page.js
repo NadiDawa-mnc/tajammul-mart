@@ -7,6 +7,20 @@ import Image from 'next/image'
 
 const allProductData = [
   {
+    _id: 109,
+    name: 'Kit (Junior)',
+    img: '/kit-pre-out.jpg',
+    description: '10 Kithabs only',
+    price: 940,
+  },
+  {
+    _id: 110,
+    name: 'Kit (Senior)',
+    img: '/kit-sec-out.jpg',
+    description: '11 Kithabs Only',
+    price: 1080,
+  },
+  {
     _id: 111,
     name: 'Khulsathul Fiqh islami',
     img: '/kulsa.jpg',
@@ -28,6 +42,14 @@ const allProductData = [
 
     img: '/nahv.jpeg',
     price: 80,
+  },
+  {
+    _id: 118,
+    name: 'Kifayathul Awaam',
+    description: 'Kithabul Aqeeda',
+
+    img: '/kifayathul.jpeg',
+    price: 30,
   },
   {
     _id: 114,
@@ -61,18 +83,11 @@ const allProductData = [
     img: '/thazkiya.jpeg',
     price: 55,
   },
-  {
-    _id: 118,
-    name: 'Kifayathul Awaam',
-    description: 'for Plus one',
 
-    img: '/kifayathul.jpeg',
-    price: 12,
-  },
   {
     _id: 119,
     name: 'Hasharathu Kuthub',
-    description: 'path kithab',
+    description: 'for Plus one',
 
     img: '/Hasharathu.jpeg',
     price: 40,
@@ -83,7 +98,32 @@ const allProductData = [
     description: 'Arabic copy writing',
 
     img: '/copy.jpeg',
-    price: 40,
+    price: 90,
+  },
+  {
+    _id: 130,
+    name: 'Noorul Quloob',
+    description: 'Jamia',
+
+    img: '/noorul.jpg',
+    price: 50,
+  },
+  {
+    _id: 131,
+    name: 'Dildare Urdu',
+    description: 'Urdu Book',
+
+    img: '/dildare.jpg',
+    price: 150,
+  },
+
+  {
+    _id: 132,
+    name: 'JMN Reading Book',
+    description: ' Book',
+
+    img: '/dildare.jpg',
+    price: 100,
   },
 ]
 

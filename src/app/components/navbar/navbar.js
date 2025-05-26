@@ -36,7 +36,7 @@ export default function Navbar({ NavLinks }) {
       return NavLinks // full access
     } else if (['counter01', 'counter02', 'counter03'].includes(username)) {
       return NavLinks.filter((link) =>
-        ['/', '/home', '/order'].includes(link.href)
+        ['/', '/home', '/billing'].includes(link.href)
       )
     } else if (username === 'counter04') {
       return NavLinks.filter((link) => ['/', '/order'].includes(link.href))
