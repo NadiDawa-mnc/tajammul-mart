@@ -48,7 +48,7 @@ const allProductData = [
     name: 'Kifayathul Awaam',
     description: 'Kithabul Aqeeda',
 
-    img: '/kifayathul.jpeg',
+    img: '/kifaya.jpg',
     price: 30,
   },
   {
@@ -97,7 +97,7 @@ const allProductData = [
     name: 'C7 Copy',
     description: 'Arabic copy writing',
 
-    img: '/copy.jpeg',
+    img: '/copy.jpg',
     price: 90,
   },
   {
@@ -122,7 +122,7 @@ const allProductData = [
     name: 'JMN Reading Book',
     description: ' Book',
 
-    img: '/dildare.jpg',
+    img: '/dildre.jpg',
     price: 100,
   },
 ]
