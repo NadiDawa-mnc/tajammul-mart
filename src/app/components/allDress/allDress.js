@@ -14,12 +14,12 @@ const productData = [
   },
   {
     _id: 8,
-    name: 'Yemeni Cap',
-    description: 'Cap',
+    name: 'Cap',
+    description: 'white Cap',
 
     img: '/yameni.jpg',
 
-    price: 500,
+    price: 100,
   },
   {
     _id: 9,
