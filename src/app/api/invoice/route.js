@@ -3,36 +3,31 @@ import { OrderSchema } from '@/app/lib/orderModel'
 import mongoose from 'mongoose'
 import { NextResponse } from 'next/server'
 
-// export async function GET() {
-//   await mongoose.connect(connectionStr)
-//   const orders = await OrderSchema.find()
-//   return NextResponse.json({ result: orders })
-// }
-
-export async function GET() {
+export async function GET(req) {
   await mongoose.connect(connectionStr)
 
-  const orders = await OrderSchema.find({ billedStatus: true })
+  const { searchParams } = new URL(req.url)
+
+  const query = {}
+
+  // Optional filters from query string
+  if (searchParams.has('campus')) {
+    query.campus = searchParams.get('campus')
+  }
+
+  if (searchParams.has('paymentStatus')) {
+    query.paymentStatus = searchParams.get('paymentStatus')
+  }
+
+  if (searchParams.has('deliveryStatus')) {
+    query.deliveryStatus = searchParams.get('deliveryStatus')
+  }
+
+  if (searchParams.has('billedStatus')) {
+    query.billedStatus = searchParams.get('billedStatus') === 'true'
+  }
+
+  const orders = await OrderSchema.find(query)
 
   return NextResponse.json({ result: orders })
 }
-
-// export async function POST(req) {
-//   await mongoose.connect(connectionStr)
-//   const payload = await req.json()
-
-//   // Generate unique order number
-//   const orderNumber = 'JM-' + Date.now()
-
-//   // Attach order number to payload
-//   const newOrder = new OrderSchema({ ...payload, orderNumber })
-
-//   await newOrder.save()
-
-//   // Return result to frontend
-//   return NextResponse.json({
-//     success: true,
-//     orderNumber,
-//     result: newOrder, // optional, for debugging
-//   })
-// }
