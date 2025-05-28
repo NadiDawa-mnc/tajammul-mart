@@ -27,6 +27,11 @@ export async function GET(req) {
     query.billedStatus = searchParams.get('billedStatus') === 'true'
   }
 
+  // Filter by item name in cartItems array
+  if (searchParams.has('itemName')) {
+    query['cartItems.name'] = searchParams.get('itemName')
+  }
+
   const orders = await OrderSchema.find(query)
 
   return NextResponse.json({ result: orders })
